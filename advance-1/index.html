@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance 1: Async JavaScript & Fetch API</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: #1e3c72;
+            border-bottom: 3px solid #1e3c72;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        button {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .output {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #1e3c72;
+            font-family: 'Consolas', monospace;
+            min-height: 50px;
+            white-space: pre-wrap;
+        }
+
+        .loading {
+            color: #2a5298;
+            font-style: italic;
+        }
+
+        .error {
+            color: #dc3545;
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        .success {
+            color: #155724;
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .user-card {
+            background: linear-gradient(135deg, #f5f7fa, #e4e8ec);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            display: inline-block;
+            min-width: 250px;
+        }
+
+        .user-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .user-card .info {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .users-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .post-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .post-card h4 {
+            margin: 0 0 10px 0;
+            color: #1e3c72;
+        }
+
+        input[type="text"], input[type="number"] {
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            margin: 5px;
+            width: 200px;
+        }
+
+        input:focus {
+            border-color: #1e3c72;
+            outline: none;
+        }
+
+        .timer {
+            font-size: 48px;
+            text-align: center;
+            color: #1e3c72;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advance 1: Async JavaScript & Fetch API</h1>
+
+    <!-- Exercise 1: setTimeout & setInterval -->
+    <div class="section">
+        <h2>Exercise 1: Timers (setTimeout & setInterval)</h2>
+
+        <h3>Delayed Message</h3>
+        <button id="delayed-btn">Show Message After 2 Seconds</button>
+        <div class="output" id="delayed-output">Click button to see delayed message...</div>
+
+        <h3>Countdown Timer</h3>
+        <div class="timer" id="countdown-display">10</div>
+        <button id="start-countdown">Start Countdown</button>
+        <button id="stop-countdown">Stop</button>
+        <button id="reset-countdown">Reset</button>
+    </div>
+
+    <!-- Exercise 2: Promises -->
+    <div class="section">
+        <h2>Exercise 2: Promises</h2>
+
+        <h3>Simulate Async Operation</h3>
+        <button id="promise-success">Simulate Success (2s)</button>
+        <button id="promise-fail">Simulate Failure (2s)</button>
+        <div class="output" id="promise-output">Click a button to see promise in action...</div>
+
+        <h3>Promise Chain</h3>
+        <button id="promise-chain">Run Promise Chain</button>
+        <div class="output" id="chain-output">Click to see sequential async operations...</div>
+    </div>
+
+    <!-- Exercise 3: Fetch API -->
+    <div class="section">
+        <h2>Exercise 3: Fetch API - Get Data</h2>
+
+        <h3>Fetch Users</h3>
+        <button id="fetch-users">Fetch Users from API</button>
+        <div class="users-container" id="users-container"></div>
+        <div class="output" id="users-output">Click to fetch users from JSONPlaceholder API...</div>
+
+        <h3>Fetch Single User</h3>
+        <input type="number" id="user-id-input" placeholder="User ID (1-10)" min="1" max="10">
+        <button id="fetch-single-user">Fetch User</button>
+        <div class="output" id="single-user-output">Enter ID and click to fetch specific user...</div>
+    </div>
+
+    <!-- Exercise 4: Fetch Posts -->
+    <div class="section">
+        <h2>Exercise 4: Fetch Posts</h2>
+
+        <button id="fetch-posts">Fetch Latest 5 Posts</button>
+        <div id="posts-container"></div>
+        <div class="output" id="posts-output">Click to fetch posts...</div>
+    </div>
+
+    <!-- Exercise 5: Async/Await -->
+    <div class="section">
+        <h2>Exercise 5: Async/Await Syntax</h2>
+
+        <h3>Fetch with Async/Await</h3>
+        <button id="async-fetch">Fetch Data (Async/Await)</button>
+        <div class="output" id="async-output">Click to see async/await in action...</div>
+
+        <h3>Multiple Parallel Requests</h3>
+        <button id="parallel-fetch">Fetch Users & Posts Together</button>
+        <div class="output" id="parallel-output">Click to fetch multiple resources simultaneously...</div>
+    </div>
+
+    <!-- NEW Exercise 6: Promise.race & Promise.any -->
+    <div class="section">
+        <h2>Exercise 6: Promise.race() & Promise.any()</h2>
+        <p><strong>Learn:</strong> Race multiple promises - first to finish wins!</p>
+
+        <h3>Promise.race - First to Complete (Success or Fail)</h3>
+        <button id="promise-race">Run Promise Race</button>
+        <div class="output" id="race-output">Click to see which promise wins the race...</div>
+
+        <h3>Timeout Pattern - Cancel Slow Requests</h3>
+        <button id="timeout-fetch">Fetch with 1s Timeout</button>
+        <div class="output" id="timeout-output">This will timeout if API takes more than 1 second...</div>
+    </div>
+
+    <!-- NEW Exercise 7: AbortController -->
+    <div class="section">
+        <h2>Exercise 7: AbortController - Cancel Requests</h2>
+        <p><strong>Learn:</strong> How to cancel ongoing fetch requests!</p>
+
+        <h3>Cancelable Fetch Request</h3>
+        <button id="start-fetch">Start Long Fetch</button>
+        <button id="cancel-fetch">Cancel Fetch</button>
+        <div class="output" id="abort-output">Start a fetch, then cancel it before it completes...</div>
+    </div>
+
+    <!-- NEW Exercise 8: Execution Order -->
+    <div class="section">
+        <h2>Exercise 8: Understanding Execution Order</h2>
+        <p><strong>Learn:</strong> How JavaScript handles sync vs async code!</p>
+
+        <button id="execution-order">Run Execution Order Demo</button>
+        <div class="output" id="order-output">Click to see the order of execution (check console too!)...</div>
+        <p><small>Open browser console (F12) to see detailed logs</small></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

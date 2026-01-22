@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance 3: Error Handling & Form Validation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: #f5576c;
+            border-bottom: 3px solid #f5576c;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        button {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        input, select {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            margin: 5px 0;
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #f5576c;
+            outline: none;
+        }
+
+        input.valid {
+            border-color: #28a745;
+        }
+
+        input.invalid {
+            border-color: #dc3545;
+        }
+
+        .output {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #f5576c;
+            font-family: 'Consolas', monospace;
+            white-space: pre-wrap;
+        }
+
+        .error {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+
+        .success {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .password-strength {
+            height: 5px;
+            border-radius: 3px;
+            margin-top: 5px;
+            transition: all 0.3s;
+        }
+
+        .strength-weak { background: #dc3545; width: 33%; }
+        .strength-medium { background: #ffc107; width: 66%; }
+        .strength-strong { background: #28a745; width: 100%; }
+
+        .validation-rules {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .validation-rules li {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .validation-rules li.valid {
+            color: #28a745;
+        }
+
+        .validation-rules li.valid::before {
+            content: '✓ ';
+        }
+
+        .validation-rules li.invalid::before {
+            content: '✗ ';
+            color: #dc3545;
+        }
+
+        .card-preview {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .card-preview .card-number {
+            font-size: 20px;
+            letter-spacing: 3px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advance 3: Error Handling & Form Validation</h1>
+
+    <!-- Exercise 1: Try-Catch -->
+    <div class="section">
+        <h2>Exercise 1: Try-Catch Error Handling</h2>
+
+        <h3>Parse JSON</h3>
+        <input type="text" id="json-input" placeholder='Enter JSON like: {"name": "John"}'>
+        <button id="parse-json-btn">Parse JSON</button>
+        <div class="output" id="json-output">Enter JSON and click parse...</div>
+
+        <h3>Divide Numbers</h3>
+        <input type="number" id="num-a" placeholder="Number A" style="width: 100px;">
+        <span> ÷ </span>
+        <input type="number" id="num-b" placeholder="Number B" style="width: 100px;">
+        <button id="divide-btn">Divide</button>
+        <div class="output" id="divide-output">Enter numbers and click divide...</div>
+    </div>
+
+    <!-- Exercise 2: Form Validation -->
+    <div class="section">
+        <h2>Exercise 2: Real-Time Form Validation</h2>
+
+        <form id="registration-form">
+            <div class="form-group">
+                <label for="reg-username">Username</label>
+                <input type="text" id="reg-username" placeholder="At least 3 characters">
+                <div class="error-message" id="username-error">Username must be at least 3 characters</div>
+            </div>
+
+            <div class="form-group">
+                <label for="reg-email">Email</label>
+                <input type="text" id="reg-email" placeholder="example@email.com">
+                <div class="error-message" id="email-error">Please enter a valid email address</div>
+            </div>
+
+            <div class="form-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" placeholder="At least 8 characters">
+                <div class="password-strength" id="password-strength"></div>
+                <div class="error-message" id="password-error">Password must be at least 8 characters</div>
+            </div>
+
+            <div class="form-group">
+                <label for="reg-confirm">Confirm Password</label>
+                <input type="password" id="reg-confirm" placeholder="Re-enter password">
+                <div class="error-message" id="confirm-error">Passwords do not match</div>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <div class="output" id="form-output">Fill the form to see validation in action...</div>
+    </div>
+
+    <!-- Exercise 3: Password Strength -->
+    <div class="section">
+        <h2>Exercise 3: Password Strength Checker</h2>
+
+        <div class="form-group">
+            <label for="check-password">Enter Password</label>
+            <input type="password" id="check-password" placeholder="Type a password...">
+        </div>
+
+        <div class="validation-rules" id="password-rules">
+            <p><strong>Password Requirements:</strong></p>
+            <ul>
+                <li id="rule-length" class="invalid">At least 8 characters</li>
+                <li id="rule-uppercase" class="invalid">At least one uppercase letter</li>
+                <li id="rule-lowercase" class="invalid">At least one lowercase letter</li>
+                <li id="rule-number" class="invalid">At least one number</li>
+                <li id="rule-special" class="invalid">At least one special character (!@#$%^&*)</li>
+            </ul>
+        </div>
+
+        <div class="output" id="strength-output">Start typing to check password strength...</div>
+    </div>
+
+    <!-- Exercise 4: Credit Card Validation -->
+    <div class="section">
+        <h2>Exercise 4: Credit Card Validation</h2>
+
+        <div class="form-group">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+        </div>
+
+        <div class="form-group">
+            <label for="card-expiry">Expiry Date</label>
+            <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5">
+        </div>
+
+        <div class="form-group">
+            <label for="card-cvv">CVV</label>
+            <input type="text" id="card-cvv" placeholder="123" maxlength="3" style="width: 100px;">
+        </div>
+
+        <div class="card-preview">
+            <div>CREDIT CARD</div>
+            <div class="card-number" id="card-display">•••• •••• •••• ••••</div>
+            <div><span id="expiry-display">MM/YY</span> | CVV: <span id="cvv-display">•••</span></div>
+        </div>
+
+        <div class="output" id="card-output">Enter card details to validate...</div>
+    </div>
+
+    <!-- Exercise 5: Async Error Handling -->
+    <div class="section">
+        <h2>Exercise 5: Async Error Handling</h2>
+
+        <h3>Fetch with Error Handling</h3>
+        <input type="text" id="api-url" placeholder="Enter API URL" value="https://jsonplaceholder.typicode.com/users/1" style="width: 400px;">
+        <button id="fetch-btn">Fetch Data</button>
+        <button id="fetch-invalid-btn">Fetch Invalid URL</button>
+        <div class="output" id="fetch-output">Click a button to fetch data...</div>
+    </div>
+
+    <!-- NEW Exercise 6: throw & Custom Errors -->
+    <div class="section">
+        <h2>Exercise 6: throw & Custom Errors</h2>
+        <p><strong>Learn:</strong> Create and throw your own errors with custom messages!</p>
+
+        <h3>Age Verification</h3>
+        <input type="number" id="age-input" placeholder="Enter your age" style="width: 150px;">
+        <button id="verify-age-btn">Verify Age</button>
+        <div class="output" id="age-output">Enter age to verify (must be 18+)...</div>
+
+        <h3>Custom Error Types</h3>
+        <select id="error-type" style="width: 200px;">
+            <option value="validation">ValidationError</option>
+            <option value="auth">AuthenticationError</option>
+            <option value="network">NetworkError</option>
+            <option value="notfound">NotFoundError</option>
+        </select>
+        <button id="throw-custom-btn">Throw Custom Error</button>
+        <div class="output" id="custom-error-output">Select error type and click throw...</div>
+    </div>
+
+    <!-- NEW Exercise 7: finally Block -->
+    <div class="section">
+        <h2>Exercise 7: try-catch-finally</h2>
+        <p><strong>Learn:</strong> The finally block ALWAYS runs, success or failure!</p>
+
+        <button id="finally-success-btn">Run Success Operation</button>
+        <button id="finally-fail-btn">Run Failing Operation</button>
+        <div class="output" id="finally-output">Click a button to see finally in action...</div>
+        <div class="output" id="cleanup-log">Cleanup log will appear here...</div>
+    </div>
+
+    <!-- NEW Exercise 8: Error Handling Patterns -->
+    <div class="section">
+        <h2>Exercise 8: Error Handling Patterns</h2>
+        <p><strong>Learn:</strong> Best practices for handling different error scenarios!</p>
+
+        <h3>Graceful Degradation</h3>
+        <button id="graceful-btn">Try with Fallback</button>
+        <div class="output" id="graceful-output">See how errors are handled gracefully...</div>
+
+        <h3>Error Retry Pattern</h3>
+        <button id="retry-btn">Fetch with Auto-Retry (3 attempts)</button>
+        <div class="output" id="retry-output">Click to see automatic retry on failure...</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

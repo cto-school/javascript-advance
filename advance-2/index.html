@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance 2: Local Storage & Data Persistence</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: #11998e;
+            border-bottom: 3px solid #11998e;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        button {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        }
+
+        button.danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        input[type="text"], input[type="email"], input[type="color"], select {
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        input:focus, select:focus {
+            border-color: #11998e;
+            outline: none;
+        }
+
+        .output {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #11998e;
+            font-family: 'Consolas', monospace;
+            white-space: pre-wrap;
+        }
+
+        .storage-item {
+            background: #e8f5e9;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .storage-item button {
+            padding: 5px 15px;
+            font-size: 12px;
+        }
+
+        .preference-group {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .preference-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .theme-preview {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .stat-box .label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advance 2: Local Storage & Data Persistence</h1>
+
+    <!-- Exercise 1: Basic localStorage -->
+    <div class="section">
+        <h2>Exercise 1: Basic localStorage Operations</h2>
+
+        <h3>Save & Retrieve Data</h3>
+        <input type="text" id="key-input" placeholder="Key name">
+        <input type="text" id="value-input" placeholder="Value">
+        <button id="save-btn">Save to localStorage</button>
+        <button id="get-btn">Get from localStorage</button>
+        <div class="output" id="basic-output">Enter key and value to save...</div>
+
+        <h3>View All Stored Items</h3>
+        <button id="view-all-btn">View All Items</button>
+        <button id="clear-all-btn" class="danger">Clear All Storage</button>
+        <div id="storage-items"></div>
+    </div>
+
+    <!-- Exercise 2: User Preferences -->
+    <div class="section">
+        <h2>Exercise 2: Save User Preferences</h2>
+
+        <div class="preference-group">
+            <label>Your Name:</label>
+            <input type="text" id="pref-name" placeholder="Enter your name">
+        </div>
+
+        <div class="preference-group">
+            <label>Theme Color:</label>
+            <input type="color" id="pref-color" value="#11998e">
+        </div>
+
+        <div class="preference-group">
+            <label>Font Size:</label>
+            <select id="pref-font-size">
+                <option value="14">Small (14px)</option>
+                <option value="16" selected>Medium (16px)</option>
+                <option value="18">Large (18px)</option>
+                <option value="20">Extra Large (20px)</option>
+            </select>
+        </div>
+
+        <button id="save-prefs-btn">Save Preferences</button>
+        <button id="load-prefs-btn">Load Preferences</button>
+        <button id="reset-prefs-btn" class="danger">Reset to Default</button>
+
+        <div class="theme-preview" id="theme-preview">
+            Preview: Hello, User! This is how your preferences look.
+        </div>
+    </div>
+
+    <!-- Exercise 3: Persistent Counter -->
+    <div class="section">
+        <h2>Exercise 3: Persistent Visit Counter</h2>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="number" id="visit-count">0</div>
+                <div class="label">Total Visits</div>
+            </div>
+            <div class="stat-box">
+                <div class="number" id="click-count">0</div>
+                <div class="label">Button Clicks</div>
+            </div>
+            <div class="stat-box">
+                <div class="number" id="session-time">0</div>
+                <div class="label">Session (sec)</div>
+            </div>
+        </div>
+
+        <button id="increment-clicks">Click Me!</button>
+        <button id="reset-stats" class="danger">Reset All Stats</button>
+        <p><small>Refresh the page to see visit count persist!</small></p>
+    </div>
+
+    <!-- Exercise 4: Search History -->
+    <div class="section">
+        <h2>Exercise 4: Search History</h2>
+
+        <input type="text" id="search-input" placeholder="Type a search term..." style="width: 300px;">
+        <button id="search-btn">Search</button>
+
+        <h3>Recent Searches</h3>
+        <div class="history-list" id="history-list">
+            <p>No search history yet...</p>
+        </div>
+        <button id="clear-history-btn" class="danger">Clear History</button>
+    </div>
+
+    <!-- Exercise 5: JSON Data Storage -->
+    <div class="section">
+        <h2>Exercise 5: Storing Complex Data (JSON)</h2>
+
+        <h3>Add Contact</h3>
+        <input type="text" id="contact-name" placeholder="Name">
+        <input type="email" id="contact-email" placeholder="Email">
+        <input type="text" id="contact-phone" placeholder="Phone">
+        <button id="add-contact-btn">Add Contact</button>
+
+        <h3>Contacts List</h3>
+        <div id="contacts-list"></div>
+        <div class="output" id="contacts-output">Add contacts to see them stored as JSON...</div>
+    </div>
+
+    <!-- NEW Exercise 6: localStorage vs sessionStorage -->
+    <div class="section">
+        <h2>Exercise 6: localStorage vs sessionStorage</h2>
+        <p><strong>Learn:</strong> localStorage persists forever, sessionStorage clears when tab closes!</p>
+
+        <h3>Store in Both</h3>
+        <input type="text" id="dual-input" placeholder="Enter a value..." style="width: 250px;">
+        <button id="save-both-btn">Save to Both Storages</button>
+
+        <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="stat-box">
+                <div class="label">localStorage</div>
+                <div id="local-value" style="font-size: 16px; margin-top: 10px;">Empty</div>
+                <small>Persists forever</small>
+            </div>
+            <div class="stat-box" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                <div class="label">sessionStorage</div>
+                <div id="session-value" style="font-size: 16px; margin-top: 10px;">Empty</div>
+                <small>Clears on tab close</small>
+            </div>
+        </div>
+
+        <button id="check-both-btn">Check Both Values</button>
+        <button id="clear-both-btn" class="danger">Clear Both</button>
+        <p><small>Try: Save a value, close this tab, reopen. sessionStorage will be empty!</small></p>
+    </div>
+
+    <!-- NEW Exercise 7: Storage Event -->
+    <div class="section">
+        <h2>Exercise 7: Storage Events (Cross-Tab)</h2>
+        <p><strong>Learn:</strong> Detect when another tab changes localStorage!</p>
+
+        <h3>Send Message to Other Tabs</h3>
+        <input type="text" id="message-input" placeholder="Type a message..." style="width: 300px;">
+        <button id="send-message-btn">Send to Other Tabs</button>
+
+        <h3>Messages Received</h3>
+        <div class="output" id="messages-output">Open this page in another tab, send a message, and see it appear here!</div>
+
+        <p><small>Open this page in 2+ browser tabs to test cross-tab communication.</small></p>
+    </div>
+
+    <!-- NEW Exercise 8: Data with Expiration -->
+    <div class="section">
+        <h2>Exercise 8: Data with Expiration</h2>
+        <p><strong>Learn:</strong> Store data that automatically expires after a set time!</p>
+
+        <h3>Save Data with TTL (Time-To-Live)</h3>
+        <input type="text" id="expiry-key" placeholder="Key" style="width: 120px;">
+        <input type="text" id="expiry-value" placeholder="Value" style="width: 150px;">
+        <select id="expiry-time">
+            <option value="10">10 seconds</option>
+            <option value="30">30 seconds</option>
+            <option value="60">1 minute</option>
+        </select>
+        <button id="save-expiry-btn">Save with Expiry</button>
+        <button id="get-expiry-btn">Get Value</button>
+
+        <div class="output" id="expiry-output">Data will automatically expire after the selected time...</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
