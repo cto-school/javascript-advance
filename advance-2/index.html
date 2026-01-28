@@ -4,160 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advance 2: Local Storage & Data Persistence</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            min-height: 100vh;
-        }
-
-        h1 {
-            text-align: center;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        h2 {
-            color: #11998e;
-            border-bottom: 3px solid #11998e;
-            padding-bottom: 10px;
-        }
-
-        .section {
-            background: white;
-            padding: 25px;
-            margin: 25px 0;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        button {
-            background: linear-gradient(135deg, #11998e, #38ef7d);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            margin: 5px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
-        }
-
-        button.danger {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-        }
-
-        input[type="text"], input[type="email"], input[type="color"], select {
-            padding: 10px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            margin: 5px;
-        }
-
-        input:focus, select:focus {
-            border-color: #11998e;
-            outline: none;
-        }
-
-        .output {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #11998e;
-            font-family: 'Consolas', monospace;
-            white-space: pre-wrap;
-        }
-
-        .storage-item {
-            background: #e8f5e9;
-            padding: 10px 15px;
-            margin: 5px 0;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .storage-item button {
-            padding: 5px 15px;
-            font-size: 12px;
-        }
-
-        .preference-group {
-            margin: 15px 0;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-
-        .preference-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .theme-preview {
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .history-list {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .history-item {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-        }
-
-        .history-item:last-child {
-            border-bottom: none;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .stat-box {
-            background: linear-gradient(135deg, #11998e, #38ef7d);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .stat-box .number {
-            font-size: 32px;
-            font-weight: bold;
-        }
-
-        .stat-box .label {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Advance 2: Local Storage & Data Persistence</h1>
@@ -265,7 +112,7 @@
         <div class="output" id="contacts-output">Add contacts to see them stored as JSON...</div>
     </div>
 
-    <!-- NEW Exercise 6: localStorage vs sessionStorage -->
+    <!-- Exercise 6: localStorage vs sessionStorage -->
     <div class="section">
         <h2>Exercise 6: localStorage vs sessionStorage</h2>
         <p><strong>Learn:</strong> localStorage persists forever, sessionStorage clears when tab closes!</p>
@@ -292,7 +139,7 @@
         <p><small>Try: Save a value, close this tab, reopen. sessionStorage will be empty!</small></p>
     </div>
 
-    <!-- NEW Exercise 7: Storage Event -->
+    <!-- Exercise 7: Storage Event -->
     <div class="section">
         <h2>Exercise 7: Storage Events (Cross-Tab)</h2>
         <p><strong>Learn:</strong> Detect when another tab changes localStorage!</p>
@@ -307,7 +154,7 @@
         <p><small>Open this page in 2+ browser tabs to test cross-tab communication.</small></p>
     </div>
 
-    <!-- NEW Exercise 8: Data with Expiration -->
+    <!-- Exercise 8: Data with Expiration -->
     <div class="section">
         <h2>Exercise 8: Data with Expiration</h2>
         <p><strong>Learn:</strong> Store data that automatically expires after a set time!</p>
