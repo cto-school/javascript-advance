@@ -12,7 +12,7 @@
 console.log('=== Advance 5: Notes App ===');
 
 // ============================================
-// STATE & STORAGE
+// TOPIC 1: STATE & STORAGE
 // ============================================
 
 let notes = [];
@@ -34,7 +34,7 @@ function loadNotes() {
 
 
 // ============================================
-// DOM ELEMENTS
+// TOPIC 2: DOM ELEMENTS
 // ============================================
 
 const formTitle = document.querySelector('#form-title');
@@ -71,7 +71,7 @@ const clearAllBtn = document.querySelector('#clear-all-btn');
 
 
 // ============================================
-// TOAST NOTIFICATIONS
+// TOPIC 3: TOAST NOTIFICATIONS
 // ============================================
 
 function showToast(message, type = 'success') {
@@ -84,7 +84,7 @@ function showToast(message, type = 'success') {
 
 
 // ============================================
-// NOTE OPERATIONS
+// TOPIC 4: NOTE OPERATIONS (CRUD)
 // ============================================
 
 function createNote(title, content, category, color) {
@@ -123,7 +123,7 @@ function deleteNote(id) {
 
 
 // ============================================
-// RENDER NOTES
+// TOPIC 5: RENDER NOTES
 // ============================================
 
 function renderNotes() {
@@ -202,7 +202,7 @@ function updateStats() {
 
 
 // ============================================
-// FORM HANDLING
+// TOPIC 6: FORM HANDLING
 // ============================================
 
 function selectNote(id) {
@@ -278,7 +278,7 @@ window.handleDelete = function(id = selectedNoteId) {
 
 
 // ============================================
-// UTILITY FUNCTIONS
+// TOPIC 7: UTILITY FUNCTIONS
 // ============================================
 
 function formatDate(date) {
@@ -313,7 +313,7 @@ function debounce(fn, delay) {
 
 
 // ============================================
-// EXERCISE 6: EXPORT/IMPORT
+// TOPIC 8: EXPORT/IMPORT
 // ============================================
 
 exportBtn.addEventListener('click', () => {
@@ -360,7 +360,7 @@ importFile.addEventListener('change', (e) => {
 
 
 // ============================================
-// EXERCISE 7: DARK MODE
+// TOPIC 9: DARK MODE
 // ============================================
 
 darkModeBtn.addEventListener('click', () => {
@@ -380,7 +380,7 @@ if (savedTheme === 'true') {
 
 
 // ============================================
-// EXERCISE 8: PIN NOTES
+// TOPIC 10: PIN NOTES
 // ============================================
 
 pinBtn.addEventListener('click', () => {
@@ -414,7 +414,7 @@ clearAllBtn.addEventListener('click', () => {
 
 
 // ============================================
-// EVENT LISTENERS
+// TOPIC 11: EVENT LISTENERS
 // ============================================
 
 saveBtn.addEventListener('click', handleSave);
@@ -453,7 +453,7 @@ sortBy.addEventListener('change', renderNotes);
 
 
 // ============================================
-// INITIALIZE
+// TOPIC 12: INITIALIZE
 // ============================================
 
 loadNotes();
@@ -488,3 +488,52 @@ if (notes.length === 0) {
 renderNotes();
 
 console.log('Notes App loaded! Create your first note.');
+
+
+// ============================================
+// ============================================
+// SELF-PRACTICE EXERCISES
+// ============================================
+// ============================================
+
+/*
+EXERCISE 1: Add a New Category
+------------------------------
+Add a new category called "shopping" to the Notes App.
+
+Steps:
+1. Find the noteCategory select element in index.html
+2. Add a new <option value="shopping">Shopping</option>
+3. Also add it to the filterCategory select
+4. Test by creating a note with the new category
+*/
+
+
+/*
+EXERCISE 2: Change Toast Duration
+---------------------------------
+Currently toasts disappear after 3 seconds (3000ms).
+Change it to 5 seconds.
+
+Find this line in TOPIC 3:
+    setTimeout(() => toast.remove(), 3000);
+
+Change 3000 to: _______________
+*/
+
+
+/*
+EXERCISE 3: Add a New Keyboard Shortcut
+---------------------------------------
+Currently Ctrl+S saves the note.
+Add a new shortcut: Ctrl+D to toggle dark mode.
+
+Find the keydown event listener in TOPIC 11 and add:
+
+if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+    e.preventDefault();
+    // Your code to toggle dark mode
+}
+
+Hint: Look at how the darkModeBtn click handler works
+*/

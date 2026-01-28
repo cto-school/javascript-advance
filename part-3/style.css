@@ -1,4 +1,4 @@
-/* Advance 1: Async JavaScript & Fetch API - Styles */
+/* Part 3: Fetch API - Styles */
 
 * {
     box-sizing: border-box;
@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    max-width: 900px;
+    max-width: 800px;
     margin: 50px auto;
     padding: 20px;
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
@@ -50,9 +50,18 @@ button:hover {
     box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
 }
 
-button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
+input[type="number"] {
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 5px;
+    width: 150px;
+}
+
+input:focus {
+    border-color: #1e3c72;
+    outline: none;
 }
 
 .output {
@@ -71,76 +80,52 @@ button:disabled {
     font-style: italic;
 }
 
-.error {
-    color: #dc3545;
-    background: #f8d7da;
-    border-left-color: #dc3545;
-}
-
 .success {
-    color: #155724;
     background: #d4edda;
     border-left-color: #28a745;
+    color: #155724;
+}
+
+.error {
+    background: #f8d7da;
+    border-left-color: #dc3545;
+    color: #721c24;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .user-card {
     background: linear-gradient(135deg, #f5f7fa, #e4e8ec);
     padding: 15px;
     border-radius: 10px;
-    margin: 10px 0;
-    display: inline-block;
-    min-width: 250px;
+    min-width: 200px;
 }
 
-.user-card img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-right: 15px;
-    vertical-align: middle;
+.user-card h4 {
+    margin: 0 0 5px 0;
+    color: #1e3c72;
 }
 
-.user-card .info {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.users-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+.user-card p {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #666;
 }
 
 .post-card {
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: #f8f9fa;
     padding: 15px;
     border-radius: 8px;
     margin: 10px 0;
+    border-left: 3px solid #1e3c72;
 }
 
 .post-card h4 {
     margin: 0 0 10px 0;
     color: #1e3c72;
-}
-
-input[type="text"], input[type="number"] {
-    padding: 10px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 16px;
-    margin: 5px;
-    width: 200px;
-}
-
-input:focus {
-    border-color: #1e3c72;
-    outline: none;
-}
-
-.timer {
-    font-size: 48px;
-    text-align: center;
-    color: #1e3c72;
-    font-weight: bold;
 }

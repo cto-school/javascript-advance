@@ -1,4 +1,4 @@
-/* Advance 2: Local Storage & Data Persistence - Styles */
+/* Part 4: localStorage - Styles */
 
 * {
     box-sizing: border-box;
@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    max-width: 900px;
+    max-width: 800px;
     margin: 50px auto;
     padding: 20px;
     background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
@@ -54,15 +54,16 @@ button.danger {
     background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
-input[type="text"], input[type="email"], input[type="color"], select {
+input[type="text"], input[type="number"] {
     padding: 10px 15px;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     font-size: 16px;
     margin: 5px;
+    width: 150px;
 }
 
-input:focus, select:focus {
+input:focus {
     border-color: #11998e;
     outline: none;
 }
@@ -92,45 +93,9 @@ input:focus, select:focus {
     font-size: 12px;
 }
 
-.preference-group {
-    margin: 15px 0;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.preference-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.theme-preview {
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    margin-top: 15px;
-    transition: all 0.3s ease;
-}
-
-.history-list {
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.history-item {
-    padding: 8px;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
-}
-
-.history-item:last-child {
-    border-bottom: none;
-}
-
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin: 15px 0;
 }
@@ -144,11 +109,39 @@ input:focus, select:focus {
 }
 
 .stat-box .number {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
 }
 
 .stat-box .label {
-    font-size: 12px;
+    font-size: 14px;
     opacity: 0.9;
+}
+
+.compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.compare-box {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.compare-box.local {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    color: white;
+}
+
+.compare-box.session {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.compare-box .label {
+    font-weight: bold;
+    margin-bottom: 10px;
 }

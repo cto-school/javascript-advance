@@ -1,6 +1,6 @@
 # Advanced JavaScript - Practice Exercises
 
-This folder contains 5 advanced JavaScript modules that build upon the basic DOM manipulation concepts. Each module focuses on real-world programming patterns and techniques.
+This folder contains 8 advanced JavaScript modules that build upon the basic DOM manipulation concepts. Each module focuses on ONE concept for easy understanding.
 
 ---
 
@@ -8,118 +8,150 @@ This folder contains 5 advanced JavaScript modules that build upon the basic DOM
 
 | Module | Topic | Key Concepts |
 |--------|-------|--------------|
-| advance-1 | Async JavaScript & Fetch API | setTimeout, Promises, async/await, fetch() |
-| advance-2 | Local Storage & Data Persistence | localStorage, sessionStorage, JSON |
-| advance-3 | Error Handling & Form Validation | try-catch, throw, form validation, regex |
-| advance-4 | Working with APIs | CRUD operations, pagination, caching |
-| advance-5 | Final Project - Notes App | Combines all concepts |
+| part-1 | Timers | setTimeout, setInterval, clearTimeout, clearInterval |
+| part-2 | Promises & Async/Await | Promise, .then(), .catch(), async/await |
+| part-3 | Fetch API | fetch(), response.json(), AbortController |
+| part-4 | localStorage | setItem, getItem, JSON.stringify, JSON.parse |
+| part-5 | Error Handling | try-catch-finally, throw, custom errors |
+| part-6 | Form Validation | regex, real-time validation, input formatting |
+| part-7 | Working with APIs | GET, POST, PUT, PATCH, DELETE, debouncing |
+| part-8 | Final Project - Notes App | Combines all concepts |
 
 ---
 
-## Advance-1: Async JavaScript & Fetch API
+## Part-1: Timers (setTimeout & setInterval)
+
+**Learn how JavaScript handles delayed and repeated operations**
+
+### Topics Covered:
+- `setTimeout()` - Run code once after delay
+- `setInterval()` - Run code repeatedly
+- `clearTimeout()` - Cancel pending timeout
+- `clearInterval()` - Stop running interval
+- Execution order with event loop
+
+### Self-Practice Exercises:
+1. Change the countdown from 10 to 5 seconds
+2. Change setTimeout delay from 2000ms to 3000ms
+3. What happens if you call startCountdown() twice?
+
+---
+
+## Part-2: Promises & Async/Await
 
 **Learn how JavaScript handles asynchronous operations**
 
 ### Topics Covered:
-- `setTimeout` and `setInterval` (timers)
-- Promises and Promise states (pending, fulfilled, rejected)
+- `new Promise()` with resolve/reject
 - `.then()`, `.catch()`, `.finally()` methods
+- Promise states (pending, fulfilled, rejected)
 - `async/await` syntax
-- `fetch()` API for HTTP requests
-- `Promise.all()` for parallel requests
-- `Promise.race()` for timeout patterns
-- `AbortController` for canceling requests
+- `Promise.all()` for parallel operations
+- `Promise.race()` for competitive operations
 
-### Exercises:
-1. Delayed Message (setTimeout)
-2. Countdown Timer (setInterval)
-3. Promise Success/Failure
-4. Promise Chaining
-5. Fetch Users from API
-6. Promise.race & Timeout Pattern
-7. AbortController - Cancel Requests
-8. Execution Order Demo
+### Self-Practice Exercises:
+1. Change the simulated delay from 1500ms to 2500ms
+2. Make simulateFailure resolve instead of reject
+3. What happens if you remove the .catch()?
 
 ---
 
-## Advance-2: Local Storage & Data Persistence
+## Part-3: Fetch API
 
-**Learn to save data in the browser that persists after page reload**
+**Learn to fetch data from external servers**
+
+### Topics Covered:
+- `fetch()` for HTTP requests
+- `response.json()` to parse JSON
+- `response.ok` to check success
+- Error handling with try-catch
+- `AbortController` to cancel requests
+- Loading states
+
+### Self-Practice Exercises:
+1. Change API to fetch /posts instead of /users
+2. Add a button that fetches a single user by ID
+3. What happens if you fetch from invalid URL?
+
+---
+
+## Part-4: localStorage
+
+**Learn to save data in the browser that persists after reload**
 
 ### Topics Covered:
 - `localStorage.setItem()` and `getItem()`
 - `localStorage.removeItem()` and `clear()`
 - `JSON.stringify()` and `JSON.parse()`
 - `sessionStorage` vs `localStorage`
-- Storage events for cross-tab communication
-- Data expiration patterns
 
-### Exercises:
-1. Basic localStorage Operations
-2. Save User Preferences
-3. Persistent Visit Counter
-4. Search History
-5. Contacts with JSON Storage
-6. localStorage vs sessionStorage
-7. Storage Events (Cross-Tab)
-8. Data with Expiration (TTL)
+### Self-Practice Exercises:
+1. Save your name and display it on page load
+2. Create a "Remember Me" checkbox that saves preference
+3. What's the difference between localStorage and sessionStorage?
 
 ---
 
-## Advance-3: Error Handling & Form Validation
+## Part-5: Error Handling
 
-**Learn to handle errors gracefully and validate user input**
+**Learn to handle errors gracefully**
 
 ### Topics Covered:
 - `try-catch-finally` blocks
 - `throw new Error()` for custom errors
-- Custom Error classes
-- Real-time form validation
-- Regular expressions (regex)
-- Password strength checking
-- Input formatting (credit card, phone)
+- Error properties (message, name)
 - Async error handling
+- Retry pattern
 
-### Exercises:
-1. JSON Parsing with Error Handling
-2. Registration Form Validation
-3. Password Strength Checker
-4. Credit Card Validation
-5. Async Error Handling (fetch)
-6. throw & Custom Errors
-7. try-catch-finally Demo
-8. Error Handling Patterns (retry, fallback)
+### Self-Practice Exercises:
+1. Change the JSON error message to something custom
+2. Create a divide function that throws error for zero
+3. Add finally block that logs "Operation complete"
 
 ---
 
-## Advance-4: Working with APIs - Mini Projects
+## Part-6: Form Validation
 
-**Build real applications using external APIs**
+**Learn to validate user input before processing**
 
 ### Topics Covered:
-- Fetching and displaying API data
-- HTTP Methods: GET, POST, PUT, PATCH, DELETE
-- Pagination (_page, _limit)
-- Search with debouncing
-- Loading states and skeleton screens
-- API response caching
-- Error handling for network requests
+- Real-time validation with `input` event
+- Regular expressions (regex)
+- Visual feedback with CSS classes
+- Password strength checking
+- Input formatting (credit card, phone)
+- `preventDefault()` for form submission
 
-### Projects:
-1. User Directory
-2. Blog Posts with Comments
-3. Todo App with CRUD
-4. Photo Gallery with Pagination
-5. Search & Filter with Debounce
-6. CRUD Operations (POST/PUT/PATCH/DELETE)
-7. Loading States & Error UI
-8. API Response Caching
+### Self-Practice Exercises:
+1. Add a phone number field with validation
+2. Change minimum username length from 3 to 5
+3. Add password requirement for special character
+
+---
+
+## Part-7: Working with APIs (CRUD)
+
+**Learn all HTTP methods for data operations**
+
+### Topics Covered:
+- GET - Read data
+- POST - Create data
+- PUT - Replace entire resource
+- PATCH - Update partial data
+- DELETE - Remove data
+- Debouncing for search
+- Pagination
+
+### Self-Practice Exercises:
+1. Create a function that POSTs a new comment
+2. Explain the difference between PUT and PATCH
+3. Implement a reusable debounce function
 
 **API Used:** [JSONPlaceholder](https://jsonplaceholder.typicode.com) - Free fake API
 
 ---
 
-## Advance-5: Final Project - Notes App
+## Part-8: Final Project - Notes App
 
 **A complete application combining ALL concepts learned**
 
@@ -135,24 +167,21 @@ This folder contains 5 advanced JavaScript modules that build upon the basic DOM
 - Data persistence with localStorage
 - Keyboard shortcuts (Ctrl+S)
 
-### Concepts Used:
-- DOM Manipulation
-- Event Handling
-- Local Storage
-- Error Handling
-- Array Methods (filter, sort, find, map)
-- Debouncing
-- File API (export/import)
+### Self-Practice Exercises:
+1. Add a new category called "shopping"
+2. Change toast duration from 3 to 5 seconds
+3. Add keyboard shortcut Ctrl+D for dark mode
 
 ---
 
 ## How to Use
 
-1. Navigate to any module folder (e.g., `advance-1`)
+1. Navigate to any module folder (e.g., `part-1`)
 2. Open `index.html` in your browser
 3. Open browser console (F12) to see logs
-4. Read `chapter.txt` for detailed instructions
-5. Try each exercise and experiment with the code
+4. Read code comments for explanations
+5. Complete self-practice exercises at the end
+6. Experiment by modifying the code
 
 ---
 
@@ -169,43 +198,67 @@ Before starting these advanced modules, you should be comfortable with:
 ## File Structure
 
 ```
-advance/
+javascript-advance/
 ├── README.md
-├── advance-1/
+├── course-overview.txt
+├── instructions.txt
+├── part-1/                  (Timers)
 │   ├── index.html
-│   ├── script.js
-│   └── chapter.txt
-├── advance-2/
+│   ├── style.css
+│   └── script.js
+├── part-2/                  (Promises)
 │   ├── index.html
-│   ├── script.js
-│   └── chapter.txt
-├── advance-3/
+│   ├── style.css
+│   └── script.js
+├── part-3/                  (Fetch API)
 │   ├── index.html
-│   ├── script.js
-│   └── chapter.txt
-├── advance-4/
+│   ├── style.css
+│   └── script.js
+├── part-4/                  (localStorage)
 │   ├── index.html
-│   ├── script.js
-│   └── chapter.txt
-└── advance-5/
+│   ├── style.css
+│   └── script.js
+├── part-5/                  (Error Handling)
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── part-6/                  (Form Validation)
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── part-7/                  (APIs/CRUD)
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+└── part-8/                  (Notes App)
     ├── index.html
-    ├── script.js
-    └── chapter.txt
+    ├── style.css
+    └── script.js
 ```
 
 ---
 
 ## Tips for Learning
 
-1. **Read the code** - Each file has comments explaining the concepts
+1. **Read the code** - Each file has comments explaining concepts
 2. **Use the console** - Open F12 to see detailed logs
 3. **Experiment** - Modify the code and see what happens
 4. **Break things** - Understanding errors helps you learn
-5. **Build something** - Apply concepts to your own projects
+5. **Complete exercises** - Self-practice at end of each part
 
 ---
 
 ## Quick Reference
+
+### setTimeout & setInterval
+```javascript
+// Run once after 2 seconds
+setTimeout(() => console.log('Hello'), 2000);
+
+// Run every 1 second
+const id = setInterval(() => console.log('Tick'), 1000);
+clearInterval(id);  // Stop it
+```
 
 ### Async/Await
 ```javascript
